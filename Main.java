@@ -1,28 +1,37 @@
-// Part 3
+import javax.swing.*;
+
 
 public class Main {
 
+    static Creature Len = new Flurry(2, 2, 5);
+
+    static Creature Rylan = new Resolve(1,5,2);
 
     public static void main(String[] args) {
 
-        Creature Len = new Flurry(2, 2, 5);
+        JFrame frame = new JFrame("Application");
+        frame.setContentPane(new Application().panel1);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
         Len.setName("Len");
-        Creature Rylan = new Resolve(2,2,5);
         Rylan.setName("Rylan");
-        int rylanChoice = 0;
-        int lenChoice = 2;
 
-        while (Rylan.getHealth() > 0 && Len.getHealth() > 0) {
+    }
+    
+    public static void fightRound(Creature a, Creature b, int choiceA, int choiceB) {
+        if (a.getHealth() > 0 && b.getHealth() > 0) {
 
-            System.out.println("Len Health : " + Len.getHealth() + " Rylan Health : " + Rylan.getHealth());
-            Len.fight(Rylan, lenChoice, rylanChoice);
-            System.out.println("Rylan Health : " + Rylan.getHealth());
-            Rylan.fight(Len, rylanChoice, lenChoice);
+            System.out.println(b.getName() + " Health : " + b.getHealth() + " " + a.getName() + " Health : " + a.getHealth());
+            b.fight(a, choiceB, choiceA);
+            System.out.println(a.getName() + " Health : " + a.getHealth() + " " + b.getName() + " Health : " + b.getHealth());
+            a.fight(b, choiceA, choiceB);
 
         }
+    }
 
-        System.out.println("Len Health : " + Len.getHealth() + " Rylan Health : " + Rylan.getHealth());
-
+    public static void test(int userInput) {
+        fightRound(Len, Rylan, userInput, (int)(Math.random()*3));
     }
 
 }
