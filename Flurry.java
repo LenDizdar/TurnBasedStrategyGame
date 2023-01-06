@@ -1,8 +1,8 @@
 public class Flurry extends Creature {
-    private int dodgeChance = 10;
+    private int dodgeChance = 30;
 
-    public Flurry(int damage, int defense, int attacks) {
-        super(damage,defense,attacks,200);
+    public Flurry(String name) {
+        super(2,2,5,25, name);
     }
 
     protected int[][] fightUnique(int[] player, int[] opponent) {

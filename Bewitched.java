@@ -1,8 +1,8 @@
 public class Bewitched extends Creature {
     private int armorPen = 2;
 
-    public Bewitched(int damage, int defense, int attacks) {
-        super(damage,defense,attacks,200);
+    public Bewitched(String name) {
+        super(3,3,3,20, name);
     }
     
     public int[][] fightUnique(int[] player, int[] opponent) {

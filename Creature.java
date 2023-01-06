@@ -3,9 +3,11 @@ abstract class Creature {
     protected int[] stats;
     private String name;
     private int modifier = 1;
+    private int intention;
 
-    public Creature(int damage, int defense, int attacks, int health) {
+    public Creature(int damage, int defense, int attacks, int health, String name) {
         this.stats = new int[] {damage, defense, attacks, health};
+        this.name = name;
     }
 
     public void fight(Creature enemy, int userBoost, int enemyBoost) {
@@ -18,6 +20,9 @@ abstract class Creature {
 
             //resolve (damage-defense)*attacks
             enemy.stats[3] -= resolveFight(this, enemy, playerStats, enemyStats);
+            if (enemy.stats[3] < 0) {
+                enemy.setHealth(0);
+            }
         }
     }
 
@@ -33,7 +38,7 @@ abstract class Creature {
         int damageSum = 0;
         for (int i = 0; i < player[2]; i++) {
             System.out.println(creature.getName() + "'s Attack: " + (i+1));
-            damageSum += resolveAttack(creature.fightUnique(enemyCreature.defendUnique(player.clone(), enemy.clone()),enemy.clone()));
+            damageSum += resolveAttack(creature.fightUnique(enemyCreature.defendUnique(player.clone(), enemy.clone()),enemy.clone()), creature);
             if (enemy[1] > 0) {
                 enemy[1] -= 1;
             }
@@ -41,8 +46,12 @@ abstract class Creature {
         return damageSum;
     }
 
-    private int resolveAttack(int[][] toCompare) {
+    private int resolveAttack(int[][] toCompare, Creature attacker) {
         int damage = toCompare[0][0]-toCompare[1][1];
+        //just for resolve class's healing
+        if (toCompare[0][3] > attacker.getHealth()) {
+            attacker.setHealth(attacker.getHealth()+(toCompare[0][3] - attacker.getHealth()));
+        }
         System.out.println("Damage: " + damage);
         if (damage > 0) {
             return damage;
@@ -65,8 +74,20 @@ abstract class Creature {
         return stats[3];
     }
 
+    public void setHealth(int health) {
+        this.stats[3] = health;
+    }
+
     public void Equip() {
 
+    }
+
+    public int getIntention() {
+        return intention;
+    }
+
+    public void setRandomIntention() {
+        intention = (int) (Math.random()*3);
     }
 
 }

@@ -3,20 +3,26 @@ import javax.swing.*;
 
 public class Main {
 
-    static Creature Len = new Flurry(2, 2, 5);
+    static Creature Len = new Destruction("Len");
 
-    static Creature Rylan = new Resolve(1,5,2);
+    static Creature playerCreature = Len;
+
+    static Creature Rylan = new Resolve("Rylan");
+
+    static Application scene = new Application();
 
     public static void main(String[] args) {
 
+
         JFrame frame = new JFrame("Application");
-        frame.setContentPane(new Application().panel1);
+        frame.setContentPane(scene.panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        Len.setName("Len");
-        Rylan.setName("Rylan");
-
+        scene.updateHealth(true, true, Len);
+        scene.updateHealth(true, false, Rylan);
+        Rylan.setRandomIntention();
+        scene.displayIntention(Rylan.getIntention());
     }
     
     public static void fightRound(Creature a, Creature b, int choiceA, int choiceB) {
@@ -26,12 +32,20 @@ public class Main {
             b.fight(a, choiceB, choiceA);
             System.out.println(a.getName() + " Health : " + a.getHealth() + " " + b.getName() + " Health : " + b.getHealth());
             a.fight(b, choiceA, choiceB);
-
+            //scene.setUserHelpText("What stat will you boost this round?");
         }
+        scene.updateHealth(false, true, a);
+        scene.updateHealth(false, false, b);
+        b.setRandomIntention();
+        scene.displayIntention(b.getIntention());
     }
 
     public static void test(int userInput) {
-        fightRound(Len, Rylan, userInput, (int)(Math.random()*3));
+        fightRound(Len, Rylan, userInput, Rylan.getIntention());
+    }
+
+    public static Creature getPlayerCreature() {
+        return playerCreature;
     }
 
 }

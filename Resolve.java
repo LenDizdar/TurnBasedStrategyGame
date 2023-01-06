@@ -2,8 +2,8 @@ public class Resolve extends Creature {
     private int healing = 2;
     private int healChance = 10;
 
-    public Resolve(int damage, int defense, int attacks) {
-        super(damage,defense,attacks,400);
+    public Resolve(String name) {
+        super(2,5,2,40, name);
     }
     
     public int[][] fightUnique(int[] player, int[] opponent) {

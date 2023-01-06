@@ -1,8 +1,8 @@
 public class Destruction extends Creature {
     private int critChance = 10;
 
-    public Destruction(int damage, int defense, int attacks) {
-        super(damage,defense,attacks,300);
+    public Destruction(String name) {
+        super(5,2,2,30, name);
     }
 
     public int[][] fightUnique(int[] player, int[] opponent) {
