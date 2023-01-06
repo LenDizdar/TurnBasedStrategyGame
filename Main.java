@@ -5,6 +5,8 @@ public class Main {
 
     static Creature Len = new Destruction("Len");
 
+    static JFrame frame;
+
     static Creature playerCreature = Len;
 
     static Creature Rylan = new Resolve("Rylan");
@@ -14,15 +16,15 @@ public class Main {
     public static void main(String[] args) {
 
 
-        JFrame frame = new JFrame("Application");
-        frame.setContentPane(scene.panel1);
+        frame = new JFrame("Application");
+        scene.initialize(frame, scene.card1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         scene.updateHealth(true, true, Len);
         scene.updateHealth(true, false, Rylan);
         Rylan.setRandomIntention();
-        scene.displayIntention(Rylan.getIntention());
+        scene.displayIntention(Rylan.getIntention(), Rylan.getHealth());
     }
     
     public static void fightRound(Creature a, Creature b, int choiceA, int choiceB) {
@@ -37,7 +39,7 @@ public class Main {
         scene.updateHealth(false, true, a);
         scene.updateHealth(false, false, b);
         b.setRandomIntention();
-        scene.displayIntention(b.getIntention());
+        scene.displayIntention(b.getIntention(), b.getHealth());
     }
 
     public static void test(int userInput) {

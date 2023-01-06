@@ -1,11 +1,14 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
 
 public class Application {
     private JButton button1;
-    public JPanel panel1;
+    private CardLayout cardsLayout = new CardLayout();
+    public JPanel cards;
+    public JPanel card1;
     private JButton defense2Button;
     private JButton attacks2Button;
     private JProgressBar playerHealth;
@@ -15,7 +18,17 @@ public class Application {
     private JLabel enemyIntentionText;
     private JLabel userHelpText;
 
+    public void initialize(JFrame frame, JPanel fightPanel) {
+        Container pane = frame.getContentPane();
+        JPanel card = new JPanel();
+        card.add(new JButton("Fight!"));
+        cards = new JPanel(cardsLayout);
+        cards.add(card, "menu");
+        cards.add(fightPanel, "fight");
+        makeNextButton((JButton) card.getComponent(0), cardsLayout, cards);
+        pane.add(cards, BorderLayout.CENTER);
 
+    }
     public Application() {
 
         playerHealth.setMaximum(Main.getPlayerCreature().getHealth());
@@ -25,6 +38,7 @@ public class Application {
                 battleButton(0);
             }
         });
+
         defense2Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -35,6 +49,15 @@ public class Application {
             @Override
             public void actionPerformed(ActionEvent e) {
                 battleButton(2);
+            }
+        });
+    }
+
+    private void makeNextButton(JButton button, CardLayout layout, Container panel) {
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                layout.next(panel);
             }
         });
     }
@@ -60,25 +83,31 @@ public class Application {
         text.setText(name + " health: " + health);
     }
 
-    public void displayIntention(int intention) {
-        String toDisplay = "";
+    public void displayIntention(int intention, int health) {
+        String intentionString = "";
         switch (intention) {
             case 0 :
-                toDisplay = "damage per attack";
+                intentionString = "damage per attack";
                 break;
             case 1 :
-                toDisplay = "defense";
+                intentionString = "defense";
                 break;
             case 2 :
-                toDisplay = "attacks per round";
+                intentionString = "attacks per round";
                 break;
         }
-        enemyIntentionText.setText("The opponent intends to augment their *" + toDisplay + "* this round");
+        String toDisplay;
+        if (health > 0) {
+            toDisplay = "The opponent intends to augment their *" + intentionString + "* this round.";
+        } else {
+            toDisplay = "The opponent has been beat!";
+        }
+        enemyIntentionText.setText(toDisplay);
     }
 
     public void setUserHelpText(String input) {
         userHelpText.setText(input);
-        panel1.repaint();
+        card1.repaint();
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
