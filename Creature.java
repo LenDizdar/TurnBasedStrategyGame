@@ -2,15 +2,18 @@ abstract class Creature {
 
     protected int[] stats;
     private String name;
-    private int modifier = 1;
+    private int modifier;
     private int intention;
+    private int maxHealth;
 
-    public Creature(int damage, int defense, int attacks, int health, String name) {
-        this.stats = new int[] {damage, defense, attacks, health};
+    public Creature(int damage, int defense, int attacks, int speed, int health, int modifier, String name) {
+        this.stats = new int[] {damage, defense, attacks, health, speed};
         this.name = name;
+        this.maxHealth = health;
+        this.modifier = modifier;
     }
 
-    public void fight(Creature enemy, int userBoost, int enemyBoost) {
+    public void fight(Creature enemy, int userBoost, int enemyBoost, Application scene) {
 
         if (this.getHealth() > 0) {
 
@@ -19,7 +22,7 @@ abstract class Creature {
             int[] enemyStats = cloneStats(enemy, enemyBoost);
 
             //resolve (damage-defense)*attacks
-            enemy.stats[3] -= resolveFight(this, enemy, playerStats, enemyStats);
+            enemy.stats[3] -= resolveFight(this, enemy, playerStats, enemyStats, scene);
             if (enemy.stats[3] < 0) {
                 enemy.setHealth(0);
             }
@@ -34,11 +37,11 @@ abstract class Creature {
         return newStats;
     }
 
-    private int resolveFight(Creature creature, Creature enemyCreature, int[] player, int[] enemy) {
+    private int resolveFight(Creature creature, Creature enemyCreature, int[] player, int[] enemy, Application scene) {
         int damageSum = 0;
         for (int i = 0; i < player[2]; i++) {
             System.out.println(creature.getName() + "'s Attack: " + (i+1));
-            damageSum += resolveAttack(creature.fightUnique(enemyCreature.defendUnique(player.clone(), enemy.clone()),enemy.clone()), creature);
+            damageSum += resolveAttack(creature.fightUnique(enemyCreature.defendUnique(player.clone(), enemy.clone(), scene),enemy.clone(), scene), creature);
             if (enemy[1] > 0) {
                 enemy[1] -= 1;
             }
@@ -59,8 +62,18 @@ abstract class Creature {
         return 0;
     }
 
-    protected abstract int[][] fightUnique(int[] player, int[] opponent);
-    protected abstract int[] defendUnique(int[] player, int[] opponent);
+    protected abstract int[][] fightUnique(int[] player, int[] opponent, Application scene);
+    protected abstract int[] defendUnique(int[] player, int[] opponent, Application scene);
+
+    public void buff(int stat) {
+        this.stats[stat] += 1;
+    }
+
+    public void fullHeal() {
+        if (this.maxHealth > this.getHealth()) {
+            this.stats[3] = maxHealth;
+        }
+    }
 
     public String getName() {
         return this.name;
@@ -72,6 +85,10 @@ abstract class Creature {
 
     public int getHealth() {
         return stats[3];
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
     public void setHealth(int health) {
