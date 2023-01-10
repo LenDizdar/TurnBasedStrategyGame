@@ -106,6 +106,7 @@ abstract class Creature {
     public int getMaxHealth() {
         return maxHealth;
     }
+    public int[] getStats() {return stats;}
 
     public void setHealth(int health) {
         this.stats[3] = health;

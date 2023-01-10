@@ -29,13 +29,13 @@ public class Application {
         Container pane = frame.getContentPane();
         startMenu = new Title();
         cards = new JPanel(cardsLayout);
+        cards.setPreferredSize(new Dimension(900,500));
         cards.add(startMenu.getPanel(), "startMenu");
         cards.add(fightPanel, "fight");
         cards.add(new PostFight().getPanel(), "shop");
         makeNextButton(startMenu.getNextButton(), cardsLayout, cards);
         makeNextButton(nextButton, cardsLayout, cards);
         pane.add(cards, BorderLayout.CENTER);
-        frame.pack();
     }
 
     public Title getStartMenu() {

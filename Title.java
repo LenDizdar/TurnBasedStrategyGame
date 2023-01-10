@@ -15,6 +15,10 @@ public class Title extends Screen {
     JPopupMenu menu;
     static JTextField nameInput = new JTextField();
     private static String name;
+    private Creature destruction = new Destruction(null, 1);
+    private Creature bewitched = new Bewitched(null, 1);
+    private Creature flurry = new Flurry(null, 1);
+    private Creature resolve = new Resolve(null, 1);
 
     public void fillEnemyList(ImageIcon[] pics) {
         JLabel[] list = new JLabel[] {enIcon1, enIcon2, enIcon3, enIcon4};
@@ -35,37 +39,30 @@ public class Title extends Screen {
             Main.scene.updateHealth(true, true, Main.getPlayerCreature());
         });
         button1.addActionListener(e -> {
-            popUpTextBox(button1);
-            Main.setPlayerClass(new Destruction(null, 1));
+            Main.setPlayerClass(destruction);
+            popUpTextBox(button1, destruction.getStats());
         });
         button2.addActionListener(e -> {
-            popUpTextBox(button2);
-            Main.setPlayerClass(new Resolve(null, 1));
+            Main.setPlayerClass(resolve);
+            popUpTextBox(button2, resolve.getStats());
         });
         button3.addActionListener(e -> {
-            popUpTextBox(button3);
-            Main.setPlayerClass(new Flurry(null, 1));
+            Main.setPlayerClass(flurry);
+            popUpTextBox(button3, flurry.getStats());
         });
         button4.addActionListener(e -> {
-            popUpTextBox(button4);
-            Main.setPlayerClass(new Bewitched(null, 1));
+            Main.setPlayerClass(bewitched);
+            popUpTextBox(button4, bewitched.getStats());
         });
     }
 
-    public static void applyName(Creature toBeNamed) {
-        String toName;
-        if (!name.equals("")) {
-            toName = name;
-        } else {
-            toName = "How could you not name your creature?";
-        }
-        toBeNamed.setName(toName);
-    }
-
-    private void popUpTextBox(JButton button) {
+    private void popUpTextBox(JButton button, int[] stats) {
         menu = new JPopupMenu();
+
         menu.add(new JLabel("Name your creature!"));
         menu.add(nameInput);
+        menu.add(new JLabel("<html><strong>Stats:<br> Damage: " + stats[0] + "<br>Defense: " + stats[1] + "<br>Attacks: " + stats[2] + "<br>Health: " + stats[3] + "<br>Speed: " + stats[4] ));
+        //menu.add(new JLabel(toDisplay));
         menu.show(panel,(int) button.getLocation().getX()+5,(int) button.getLocation().getY()+30);
     }
 

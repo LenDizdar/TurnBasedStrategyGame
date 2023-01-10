@@ -1,6 +1,5 @@
 import javax.swing.*;
 
-
 public class Main {
     static JFrame frame;
     static Creature playerCreature = new Flurry("chad", 1);
