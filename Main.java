@@ -4,30 +4,38 @@ import javax.swing.*;
 public class Main {
     static JFrame frame;
     static Creature playerCreature = new Flurry("chad", 1);
+    static Application scene = new Application();
     static Creature[] enemies = generateEnemies();
     static Creature opponent;
-    static Application scene = new Application();
     static int nextEncounter = 0;
+    static ImageIcon[] icons;
 
     public static void setPlayerClass(Creature creature) {
-        //playerCreature = creature;
+        playerCreature = creature;
     }
 
     private static Creature[] generateEnemies() {
-        String[] names = {"Rylan", "Len", "Tuong"};
-        Creature[] toReturn = new Creature[3];
-        for (int i = 0; i < 3; i++) {
-            int randomNumber = (int) (Math.random()*4);
+        String[] names = {"Rylan", "Len", "Mrs. Uniat", "Tuong"};
+        Creature[] toReturn = new Creature[4];
+        icons = new ImageIcon[4];
+        for (int i = 0; i < 4; i++) {
+            int randomNumber = (int) (Math.random()*4); System.out.println(randomNumber);
             switch (randomNumber) {
                 case 0:
                     toReturn[i] = new Destruction(names[i],i*2);
+                    icons[i] = new ImageIcon("Destruction.png");
                     break;
                 case 1:
                     toReturn[i] = new Flurry(names[i],i*2);
+                    icons[i] = new ImageIcon("Flurry.png");
+                    break;
                 case 2:
                     toReturn[i] = new Bewitched(names[i],i*2);
+                    icons[i] = new ImageIcon("Bewitched.png");
+                    break;
                 case 3:
                     toReturn[i] = new Resolve(names[i],i*2);
+                    icons[i] = new ImageIcon("Resolve.png");
                 break;
             }
         }
@@ -42,10 +50,10 @@ public class Main {
         }
         frame = new JFrame("Application");
         scene.initialize(frame, scene.card1);
+        scene.getStartMenu().fillEnemyList(icons);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        nextEncounter();
     }
 
     public static void nextEncounter() {
@@ -55,22 +63,23 @@ public class Main {
 
     private static void setUpEncounter(Creature player, Creature enemy) {
         opponent = enemy;
+        scene.setCreaturePictures(player.getSprite(), enemy.getSprite());
         scene.updateHealth(true, true, player);
         scene.updateHealth(true, false, enemy);
         enemy.setRandomIntention();
         scene.displayIntention(enemy.getIntention(), enemy.getHealth(), enemy.getName());
+
     }
 
     public static void fightRound(Creature a, Creature b, int choiceA, int choiceB) {
         //try to find a better way to do this???
-        if (a.stats[4] > b.stats[4]) {
-            a.fight(b, choiceA, choiceB, scene);
+        if (b.stats[4] > a.stats[4]) {
             b.fight(a, choiceB, choiceA, scene);
+            a.fight(b, choiceA, choiceB, scene);
         } else {
-            b.fight(a, choiceB, choiceA, scene);
             a.fight(b, choiceA, choiceB, scene);
+            b.fight(a, choiceB, choiceA, scene);
         }
-
         if (a.getHealth() == 0) {
             scene.lossSetVisible(true);
         }

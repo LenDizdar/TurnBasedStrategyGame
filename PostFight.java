@@ -6,28 +6,30 @@ public class PostFight extends Screen {
     private JButton healButton;
     private JButton defense1Button;
     private JButton attacksButton;
+    Creature playerCreature;
 
     public PostFight() {
-        Creature playerCreature = Main.getPlayerCreature();
+
         damage1Button.addActionListener(e -> {
-            playerCreature.buff(0);
             goNext();
+            playerCreature.buff(0);
         });
         defense1Button.addActionListener(e -> {
-            playerCreature.buff(1);
             goNext();
+            playerCreature.buff(1);
         });
         attacksButton.addActionListener(e -> {
-            playerCreature.buff(2);
             goNext();
+            playerCreature.buff(2);
         });
         healButton.addActionListener(e -> {
-            playerCreature.fullHeal();
             goNext();
+            playerCreature.fullHeal();
         });
     }
 
     private void goNext() {
+        playerCreature = Main.getPlayerCreature();
         Main.nextEncounter();
         Application.goFightPanel();
     }

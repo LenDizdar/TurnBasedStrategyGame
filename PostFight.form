@@ -13,7 +13,7 @@
           <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Defense +1"/>
+          <text value="Defense +2"/>
         </properties>
       </component>
       <component id="e2a17" class="javax.swing.JButton" binding="healButton" default-binding="true">
@@ -34,7 +34,7 @@
           <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Attacks +1"/>
+          <text value="Attacks +2"/>
         </properties>
       </component>
       <component id="44397" class="javax.swing.JButton" binding="damage1Button" default-binding="true">
@@ -42,7 +42,7 @@
           <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Damage +1"/>
+          <text value="Damage +2"/>
         </properties>
       </component>
       <component id="443f2" class="javax.swing.JLabel">

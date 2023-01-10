@@ -1,10 +1,12 @@
+import javax.swing.*;
+
 public class Bewitched extends Creature {
     private int armorPen = 1;
-    private int wildMagicChance = 5;
+    private int stunChance = 4;
     private String name;
 
     public Bewitched(String name, int modifier) {
-        super(3,3,3, 3,20, modifier, name);
+        super(3,3,3, 3,25, modifier, name, new ImageIcon("Bewitched.png"));
         this.name = name;
     }
     
@@ -14,24 +16,9 @@ public class Bewitched extends Creature {
         } else {
             opponent[1] -= armorPen;
         }
-        if (Math.random()*100 <= wildMagicChance) {
-            int randomNumber = (int) (Math.random() * 3);
-            player[randomNumber] *= 2;
-            String output;
-            switch (randomNumber) {
-                case 0:
-                    output = " damage";
-                    break;
-                case 1:
-                    output = " defense";
-                    break;
-                case 2:
-                    output = " attacks";
-                    break;
-                default:
-                    output = " bug";
-            }
-            scene.updateCombatLog(this.getName() + output + " up!");
+        if (Math.random()*100 <= stunChance) {
+            opponent[4] = 0;
+            scene.updateCombatLog(this.getName() + " stun!");
         }
         return (new int[][] {player, opponent});
     }

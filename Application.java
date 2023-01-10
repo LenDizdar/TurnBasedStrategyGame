@@ -21,10 +21,13 @@ public class Application {
     private JButton nextButton;
     private JButton lossButton;
     private JScrollPane scrollBox;
+    private JLabel PlayerPic;
+    private JLabel OpponentPic;
+    private Title startMenu;
 
     public void initialize(JFrame frame, JPanel fightPanel) {
         Container pane = frame.getContentPane();
-        Title startMenu = new Title();
+        startMenu = new Title();
         cards = new JPanel(cardsLayout);
         cards.add(startMenu.getPanel(), "startMenu");
         cards.add(fightPanel, "fight");
@@ -32,6 +35,11 @@ public class Application {
         makeNextButton(startMenu.getNextButton(), cardsLayout, cards);
         makeNextButton(nextButton, cardsLayout, cards);
         pane.add(cards, BorderLayout.CENTER);
+        frame.pack();
+    }
+
+    public Title getStartMenu() {
+        return startMenu;
     }
     public Application() {
 
@@ -43,6 +51,11 @@ public class Application {
         attacks2Button.addActionListener(e -> battleButton(2));
 
         lossButton.addActionListener(e -> System.exit(1));
+    }
+
+    public void setCreaturePictures(ImageIcon player, ImageIcon opponent) {
+        PlayerPic.setIcon(player);
+        OpponentPic.setIcon(opponent);
     }
 
     private void makeNextButton(JButton button, CardLayout layout, Container panel) {

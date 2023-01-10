@@ -1,9 +1,11 @@
+import javax.swing.*;
+
 public class Flurry extends Creature {
-    private int dodgeChance = 30;
+    private int dodgeChance = 20;
     private String name;
 
     public Flurry(String name,int modifier) {
-        super(2,2,6, 4,25, modifier, name);
+        super(2,2,6, 4,20, modifier, name, new ImageIcon("Flurry.png"));
         this.name = name;
     }
 

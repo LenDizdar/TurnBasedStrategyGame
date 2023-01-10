@@ -8,9 +8,21 @@ public class Title extends Screen {
     private JButton button3;
     private JButton button4;
     private JButton confirmButton;
+    private JLabel enIcon1;
+    private JLabel enIcon2;
+    private JLabel enIcon3;
+    private JLabel enIcon4;
     JPopupMenu menu;
     static JTextField nameInput = new JTextField();
     private static String name;
+
+    public void fillEnemyList(ImageIcon[] pics) {
+        JLabel[] list = new JLabel[] {enIcon1, enIcon2, enIcon3, enIcon4};
+        for (int i = 0; i < 4; i++) {
+            list[i].setIcon(pics[i]);
+            list[i].setHorizontalTextPosition(SwingConstants.LEADING);
+        }
+    }
 
     public Title() {
         confirmButton.addActionListener(e -> {
@@ -19,6 +31,7 @@ public class Title extends Screen {
         });
         StartButton.addActionListener(e -> {
             Main.getPlayerCreature().setName(name);
+            Main.nextEncounter();
             Main.scene.updateHealth(true, true, Main.getPlayerCreature());
         });
         button1.addActionListener(e -> {
@@ -63,4 +76,6 @@ public class Title extends Screen {
     public JButton getNextButton() {
         return StartButton;
     }
+
+
 }
