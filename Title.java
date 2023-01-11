@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Title extends Screen {
     private JPanel panel;
@@ -40,30 +41,33 @@ public class Title extends Screen {
         });
         button1.addActionListener(e -> {
             Main.setPlayerClass(destruction);
-            popUpTextBox(button1, destruction.getStats(), "Deal destructive damage with<br>critical hits!");
+            popUpTextBox(button1, destruction.getStats(), "Deal destructive damage with critical hits!");
         });
         button2.addActionListener(e -> {
             Main.setPlayerClass(resolve);
-            popUpTextBox(button2, resolve.getStats(), "Take a bunch of hits and <br>heal it all back.");
+            popUpTextBox(button2, resolve.getStats(), "Take a bunch of hits and heal it all back.");
         });
         button3.addActionListener(e -> {
             Main.setPlayerClass(flurry);
-            popUpTextBox(button3, flurry.getStats(), "Dodge and weave while launching<br>dozens of attacks!");
+            popUpTextBox(button3, flurry.getStats(), "Dodge and weave while launching dozens of attacks!");
         });
         button4.addActionListener(e -> {
             Main.setPlayerClass(bewitched);
-            popUpTextBox(button4, bewitched.getStats(), "Stun your enemies with magic!");
+            popUpTextBox(button4, bewitched.getStats(), "Stun your enemies and break their armor with magic!");
         });
     }
 
     private void popUpTextBox(JButton button, int[] stats, String classDescription) {
         menu = new JPopupMenu();
-
         menu.add(new JLabel("Name your creature!"));
         menu.add(nameInput);
-        menu.add(new JLabel("<html><strong>Stats:<br> Damage: " + stats[0] + "<br>Defense: " + stats[1] + "<br>Attacks: " + stats[2] + "<br>Health: " + stats[3] + "<br>Speed: " + stats[4] + "<br>" + classDescription ));
-        //menu.add(new JLabel(toDisplay));
+        menu.add(new JLabel(makeStatString("",stats,classDescription)));
+        menu.setPreferredSize(new Dimension(100,180));
         menu.show(panel,(int) button.getLocation().getX()+5,(int) button.getLocation().getY()+30);
+    }
+
+    public String makeStatString(String beforeExtra, int[] stats, String afterExtra) {
+        return "<html><strong>" + beforeExtra + "Stats:<br> Damage: " + stats[0] + "<br>Defense: " + stats[1] + "<br>Attacks: " + stats[2] + "<br>Health: " + stats[3] + "<br>Speed: " + stats[4] + "<br>" + afterExtra;
     }
 
     public JPanel getPanel() {
