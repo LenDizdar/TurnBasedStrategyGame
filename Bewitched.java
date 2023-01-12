@@ -1,13 +1,11 @@
 import javax.swing.*;
 
 public class Bewitched extends Creature {
-    private int armorPen = 1;
-    private int stunChance = 4;
-    private String name;
+    private int armorPen = 3;
+    private int stunChance = 8;
 
     public Bewitched(String name, int modifier) {
-        super(3,3,3, 3,25, modifier, name, new ImageIcon("Bewitched.png"));
-        this.name = name;
+        super(2,2,3, 3,25, modifier, name, new ImageIcon("Bewitched.png"));
     }
     
     public int[][] fightUnique(int[] player, int[] opponent, Application scene) {
