@@ -11,7 +11,7 @@ public class Application {
     public JPanel card1;
     private JButton defense2Button;
     private JButton attacks2Button;
-    private JProgressBar playerHealth;
+    public JProgressBar playerHealth;
     private JProgressBar enemyHealth;
     private JLabel playerHealthText;
     private JLabel enemyHealthText;

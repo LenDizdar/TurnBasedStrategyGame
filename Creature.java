@@ -61,8 +61,12 @@ abstract class Creature {
             enemy.stunned(true);
         }
         //just for resolve class's healing
-        if (toCompare[0][3] > attacker.getHealth() && toCompare[0][3] <= attacker.getMaxHealth()) {
-            attacker.setHealth(attacker.getHealth()+(toCompare[0][3] - attacker.getHealth()));
+        if (toCompare[1][4] == -1) {
+            attacker.setHealth(attacker.getHealth()+1);
+        }
+        if  (enemy.getHealth() > 0 && toCompare[0][4] == -1) {
+            attacker.setHealth(attacker.getHealth()-1);
+            System.out.println("ahhhhhhhhhhh" + attacker.getHealth());
         }
         System.out.println("Damage: " + damage);
         return Math.max(damage, 0);
@@ -77,14 +81,12 @@ abstract class Creature {
 
     public void buff(int stat) {
         this.stats[stat] += 2;
-        for (int i = 0; i < 4; i++) {
-            //this.stats[i] ++;
-        }
     }
 
     public void fullHeal() {
         if (this.maxHealth > this.getHealth()) {
             this.stats[3] = maxHealth;
+            Main.scene.updateHealth(true, true, this);
         }
     }
 
