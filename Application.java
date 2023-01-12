@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Application {
     private JButton button1;
-    private static CardLayout cardsLayout = new CardLayout();
+    private static final CardLayout cardsLayout = new CardLayout();
     public static JPanel cards;
     public JPanel card1;
     private JButton defense2Button;
@@ -24,6 +24,7 @@ public class Application {
     private JLabel PlayerPic;
     private JLabel OpponentPic;
     private Title startMenu;
+    public PostFight shop = new PostFight();
 
     public void initialize(JFrame frame, JPanel fightPanel) {
         Container pane = frame.getContentPane();
@@ -32,9 +33,9 @@ public class Application {
         cards.setPreferredSize(new Dimension(900,500));
         cards.add(startMenu.getPanel(), "startMenu");
         cards.add(fightPanel, "fight");
-        cards.add(new PostFight().getPanel(), "shop");
-        makeNextButton(startMenu.getNextButton(), cardsLayout, cards);
-        makeNextButton(nextButton, cardsLayout, cards);
+        cards.add(shop.getPanel(), "shop");
+        makeNextButton(startMenu.getNextButton(), cards);
+        makeNextButton(nextButton, cards);
         pane.add(cards, BorderLayout.CENTER);
     }
 
@@ -58,11 +59,11 @@ public class Application {
         OpponentPic.setIcon(opponent);
     }
 
-    private void makeNextButton(JButton button, CardLayout layout, Container panel) {
+    private void makeNextButton(JButton button, Container panel) {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                nextPanel(layout, panel);
+                nextPanel(Application.cardsLayout, panel);
             }
         });
     }
