@@ -66,7 +66,6 @@ abstract class Creature {
         }
         if  (enemy.getHealth() > 0 && toCompare[0][4] == -1) {
             attacker.setHealth(attacker.getHealth()-1);
-            System.out.println("ahhhhhhhhhhh" + attacker.getHealth());
         }
         System.out.println("Damage: " + damage);
         return Math.max(damage, 0);
