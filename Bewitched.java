@@ -5,7 +5,7 @@ public class Bewitched extends Creature {
     private int stunChance = 8;
 
     public Bewitched(String name, int modifier) {
-        super(2,2,3, 3,25, modifier, name, new ImageIcon("Bewitched.png"));
+        super(2,2,3, 2,25, modifier, name, new ImageIcon("Bewitched.png"));
     }
     
     public int[][] fightUnique(int[] player, int[] opponent, Application scene) {
