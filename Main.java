@@ -73,11 +73,11 @@ public class Main {
     public static void fightRound(Creature a, Creature b, int choiceA, int choiceB) {
         //try to find a better way to do this???
         if (b.stats[4] > a.stats[4]) {
-            b.fight(a, choiceB, choiceA, scene);
-            a.fight(b, choiceA, choiceB, scene);
+            b.fight(a, choiceB, choiceA, scene, false);
+            a.fight(b, choiceA, choiceB, scene, true);
         } else {
-            a.fight(b, choiceA, choiceB, scene);
-            b.fight(a, choiceB, choiceA, scene);
+            a.fight(b, choiceA, choiceB, scene, true);
+            b.fight(a, choiceB, choiceA, scene, false);
         }
         if (a.getHealth() == 0) {
             scene.lossSetVisible(true);

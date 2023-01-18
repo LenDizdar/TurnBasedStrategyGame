@@ -6,7 +6,7 @@ public class Resolve extends Creature {
     private String name;
 
     public Resolve(String name, int modifier) {
-        super(2,5,2, 1, 40, modifier, name, new ImageIcon("Resolve.png"));
+        super(2,5,2, 1, 35, modifier, name, new ImageIcon("Resolve.png"));
         this.name = name;
     }
     

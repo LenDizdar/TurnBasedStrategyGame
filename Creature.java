@@ -8,7 +8,7 @@ abstract class Creature {
     private int intention;
     private int maxHealth;
     private boolean isStunned;
-    private ImageIcon sprite;
+    public ImageIcon sprite;
 
     public Creature(int damage, int defense, int attacks, int speed, int health, int modifier, String name, ImageIcon sprite) {
         this.stats = new int[] {damage, defense, attacks, health, speed};
@@ -18,7 +18,7 @@ abstract class Creature {
         this.sprite = sprite;
     }
 
-    public void fight(Creature enemy, int userBoost, int enemyBoost, Application scene) {
+    public void fight(Creature enemy, int userBoost, int enemyBoost, Application scene, boolean isPlayer) {
 
         if (this.getHealth() > 0) {
 
@@ -30,7 +30,7 @@ abstract class Creature {
                 this.stunned(false);
             }
             //resolve (damage-defense)*attacks
-            enemy.stats[3] -= resolveFight(this, enemy, playerStats, enemyStats, scene);
+            enemy.stats[3] -= resolveFight(this, enemy, playerStats, enemyStats, scene, isPlayer);
             if (enemy.stats[3] < 0) {
                 enemy.setHealth(0);
             }
@@ -43,7 +43,7 @@ abstract class Creature {
         return newStats;
     }
 
-    private int resolveFight(Creature creature, Creature enemyCreature, int[] player, int[] enemy, Application scene) {
+    private int resolveFight(Creature creature, Creature enemyCreature, int[] player, int[] enemy, Application scene, boolean isPlayer) {
         int damageSum = 0;
         for (int i = 0; i < player[2]; i++) {
             System.out.println(creature.getName() + "'s Attack: " + (i+1));

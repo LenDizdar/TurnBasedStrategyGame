@@ -2,11 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
 
 public class Application {
     private JButton button1;
-    private static CardLayout cardsLayout = new CardLayout();
+    private static final CardLayout cardsLayout = new CardLayout();
     public static JPanel cards;
     public JPanel card1;
     private JButton defense2Button;
@@ -21,8 +20,8 @@ public class Application {
     private JButton nextButton;
     private JButton lossButton;
     private JScrollPane scrollBox;
-    private JLabel PlayerPic;
-    private JLabel OpponentPic;
+    public JLabel PlayerPic;
+    public JLabel OpponentPic;
     private Title startMenu;
 
     public void initialize(JFrame frame, JPanel fightPanel) {
@@ -33,8 +32,8 @@ public class Application {
         cards.add(startMenu.getPanel(), "startMenu");
         cards.add(fightPanel, "fight");
         cards.add(new PostFight().getPanel(), "shop");
-        makeNextButton(startMenu.getNextButton(), cardsLayout, cards);
-        makeNextButton(nextButton, cardsLayout, cards);
+        makeNextButton(startMenu.getNextButton(), cards);
+        makeNextButton(nextButton, cards);
         pane.add(cards, BorderLayout.CENTER);
     }
 
@@ -58,11 +57,11 @@ public class Application {
         OpponentPic.setIcon(opponent);
     }
 
-    private void makeNextButton(JButton button, CardLayout layout, Container panel) {
+    private void makeNextButton(JButton button, Container panel) {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                nextPanel(layout, panel);
+                nextPanel(Application.cardsLayout, panel);
             }
         });
     }
@@ -108,18 +107,12 @@ public class Application {
     }
 
     public void displayIntention(int intention, int health, String name) {
-        String intentionString = "";
-        switch (intention) {
-            case 0 :
-                intentionString = "damage per attack";
-                break;
-            case 1 :
-                intentionString = "defense";
-                break;
-            case 2 :
-                intentionString = "attacks per round";
-                break;
-        }
+        var intentionString = switch (intention) {
+            case 0 -> "damage per attack";
+            case 1 -> "defense";
+            case 2 -> "attacks per round";
+            default -> "";
+        };
         String toDisplay;
         if (health > 0) {
             toDisplay = name + " intends to augment their *" + intentionString + "* this round.";
@@ -128,16 +121,6 @@ public class Application {
             nextButton.setVisible(true);
         }
         enemyIntentionText.setText(toDisplay);
-    }
-
-    public void setUserHelpText(String input) {
-        userHelpText.setText(input);
-        card1.repaint();
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

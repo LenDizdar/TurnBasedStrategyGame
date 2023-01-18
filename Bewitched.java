@@ -6,7 +6,7 @@ public class Bewitched extends Creature {
     private String name;
 
     public Bewitched(String name, int modifier) {
-        super(3,3,3, 3,25, modifier, name, new ImageIcon("Bewitched.png"));
+        super(3,2,3, 3,25, modifier, name, new ImageIcon("Bewitched.png"));
         this.name = name;
     }
     

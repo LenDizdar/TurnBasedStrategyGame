@@ -16,10 +16,10 @@ public class Title extends Screen {
     JPopupMenu menu;
     static JTextField nameInput = new JTextField();
     private static String name;
-    private Creature destruction = new Destruction(null, 1);
-    private Creature bewitched = new Bewitched(null, 1);
-    private Creature flurry = new Flurry(null, 1);
-    private Creature resolve = new Resolve(null, 1);
+    private final Creature destruction = new Destruction(null, 1);
+    private final Creature bewitched = new Bewitched(null, 1);
+    private final Creature flurry = new Flurry(null, 1);
+    private final Creature resolve = new Resolve(null, 1);
 
     public void fillEnemyList(ImageIcon[] pics) {
         JLabel[] list = new JLabel[] {enIcon1, enIcon2, enIcon3, enIcon4};
@@ -45,7 +45,7 @@ public class Title extends Screen {
         });
         button2.addActionListener(e -> {
             Main.setPlayerClass(resolve);
-            popUpTextBox(button2, resolve.getStats(), "Take a bunch of hits and heal it all back.");
+            popUpTextBox(button2, resolve.getStats(), "Damage enemies for punching you! And heal it all back.");
         });
         button3.addActionListener(e -> {
             Main.setPlayerClass(flurry);
@@ -62,7 +62,7 @@ public class Title extends Screen {
         menu.add(new JLabel("Name your creature!"));
         menu.add(nameInput);
         menu.add(new JLabel(makeStatString("",stats,classDescription)));
-        menu.setPreferredSize(new Dimension(100,180));
+        menu.setPreferredSize(new Dimension(100,200));
         menu.show(panel,(int) button.getLocation().getX()+5,(int) button.getLocation().getY()+30);
     }
 
