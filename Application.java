@@ -23,6 +23,7 @@ public class Application {
     public JLabel PlayerPic;
     public JLabel OpponentPic;
     private Title startMenu;
+    public PostFight shop = new PostFight();
 
     public void initialize(JFrame frame, JPanel fightPanel) {
         Container pane = frame.getContentPane();
@@ -31,7 +32,7 @@ public class Application {
         cards.setPreferredSize(new Dimension(900,500));
         cards.add(startMenu.getPanel(), "startMenu");
         cards.add(fightPanel, "fight");
-        cards.add(new PostFight().getPanel(), "shop");
+        cards.add(shop.getPanel(), "shop");
         makeNextButton(startMenu.getNextButton(), cards);
         makeNextButton(nextButton, cards);
         pane.add(cards, BorderLayout.CENTER);
