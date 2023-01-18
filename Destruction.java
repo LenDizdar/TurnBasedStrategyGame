@@ -2,11 +2,9 @@ import javax.swing.*;
 
 public class Destruction extends Creature {
     private int critChance = 10;
-    private String name;
 
     public Destruction(String name, int modifier) {
-        super(5,2,2, 2, 30, modifier, name, new ImageIcon("Destruction.png"));
-        this.name = name;
+        super(5,2,2, 3, 30, modifier, name, new ImageIcon("Destruction.png"));
     }
 
     public int[][] fightUnique(int[] player, int[] opponent, Application scene) {

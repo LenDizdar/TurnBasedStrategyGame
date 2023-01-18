@@ -6,6 +6,8 @@ public class PostFight extends Screen {
     private JButton healButton;
     private JButton defense1Button;
     private JButton attacksButton;
+    private JLabel enemyPreview;
+    private JLabel playerStatsText;
     Creature playerCreature;
 
     public PostFight() {
@@ -28,10 +30,19 @@ public class PostFight extends Screen {
         });
     }
 
+    public void playerStatSet() {
+        playerStatsText.setText(new Title().makeStatString("Your ", Main.getPlayerCreature().stats, ""));
+    }
+
     private void goNext() {
         playerCreature = Main.getPlayerCreature();
         Main.nextEncounter();
         Application.goFightPanel();
+    }
+
+    public void setEnemyPreview(ImageIcon enemy) {
+        enemyPreview.setIcon(enemy);
+        enemyPreview.setHorizontalTextPosition(SwingConstants.LEADING);
     }
 
     public JPanel getPanel() {

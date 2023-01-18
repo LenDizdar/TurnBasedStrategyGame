@@ -57,7 +57,11 @@ public class Main {
 
     public static void nextEncounter() {
         setUpEncounter(playerCreature, enemies[nextEncounter]);
-        nextEncounter++;
+        scene.shop.playerStatSet();
+        if (nextEncounter < 3) {
+            nextEncounter ++;
+        }
+        scene.shop.setEnemyPreview(enemies[nextEncounter].getSprite());
     }
 
     private static void setUpEncounter(Creature player, Creature enemy) {
