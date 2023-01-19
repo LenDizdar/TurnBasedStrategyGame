@@ -8,6 +8,8 @@ public class Main {
     static Creature opponent;
     static int nextEncounter = 0;
     static ImageIcon[] icons;
+    static Environment[] battlefields = generateEnvironments();
+    static Environment battlefield = battlefields[0];
 
     public static void setPlayerClass(Creature creature) {
         playerCreature = creature;
@@ -18,24 +20,37 @@ public class Main {
         Creature[] toReturn = new Creature[4];
         icons = new ImageIcon[4];
         for (int i = 0; i < 4; i++) {
-            int randomNumber = (int) (Math.random()*4); System.out.println(randomNumber);
+            int randomNumber = (int) (Math.random()*4);
             switch (randomNumber) {
-                case 0:
-                    toReturn[i] = new Destruction(names[i],i*2);
+                case 0 -> {
+                    toReturn[i] = new Destruction(names[i], i * 2);
                     icons[i] = new ImageIcon("Destruction.png");
-                    break;
-                case 1:
-                    toReturn[i] = new Flurry(names[i],i*2);
+                }
+                case 1 -> {
+                    toReturn[i] = new Flurry(names[i], i * 2);
                     icons[i] = new ImageIcon("Flurry.png");
-                    break;
-                case 2:
-                    toReturn[i] = new Bewitched(names[i],i*2);
+                }
+                case 2 -> {
+                    toReturn[i] = new Bewitched(names[i], i * 2);
                     icons[i] = new ImageIcon("Bewitched.png");
-                    break;
-                case 3:
-                    toReturn[i] = new Resolve(names[i],i*2);
+                }
+                case 3 -> {
+                    toReturn[i] = new Resolve(names[i], i * 2);
                     icons[i] = new ImageIcon("Resolve.png");
-                break;
+                }
+            }
+        }
+        return toReturn;
+    }
+
+    private static Environment[] generateEnvironments() {
+        Environment[] toReturn = new Environment[4];
+        for (int i = 0; i < 4; i++) {
+            int randomNumber = (int) (Math.random()*3);
+            switch (randomNumber) {
+                case 0 -> toReturn[i] = Environment.FOREST;
+                case 1 -> toReturn[i] = Environment.DESERT;
+                case 2 -> toReturn[i] = Environment.TUNDRA;
             }
         }
         return toReturn;
@@ -57,6 +72,7 @@ public class Main {
 
     public static void nextEncounter() {
         setUpEncounter(playerCreature, enemies[nextEncounter]);
+        battlefield = battlefields[nextEncounter];
         scene.shop.playerStatSet();
         if (nextEncounter < 3) {
             nextEncounter ++;
@@ -66,6 +82,7 @@ public class Main {
 
     private static void setUpEncounter(Creature player, Creature enemy) {
         opponent = enemy;
+        scene.setFightBackground(battlefield.getColor());
         scene.setCreaturePictures(player.getSprite(), enemy.getSprite());
         scene.updateHealth(true, true, player);
         scene.updateHealth(true, false, enemy);
@@ -77,11 +94,11 @@ public class Main {
     public static void fightRound(Creature a, Creature b, int choiceA, int choiceB) {
         //try to find a better way to do this???
         if (b.stats[4] > a.stats[4]) {
-            b.fight(a, choiceB, choiceA, scene, false);
-            a.fight(b, choiceA, choiceB, scene, true);
+            b.fight(a, choiceB, choiceA, scene, false, battlefield.getStatChanges());
+            a.fight(b, choiceA, choiceB, scene, true, battlefield.getStatChanges());
         } else {
-            a.fight(b, choiceA, choiceB, scene, true);
-            b.fight(a, choiceB, choiceA, scene, false);
+            a.fight(b, choiceA, choiceB, scene, true, battlefield.getStatChanges());
+            b.fight(a, choiceB, choiceA, scene, false, battlefield.getStatChanges());
         }
         if (a.getHealth() == 0) {
             scene.lossSetVisible(true);

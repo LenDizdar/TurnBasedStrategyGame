@@ -37,7 +37,6 @@ public class Application {
         makeNextButton(nextButton, cards);
         pane.add(cards, BorderLayout.CENTER);
     }
-
     public Title getStartMenu() {
         return startMenu;
     }
@@ -66,6 +65,11 @@ public class Application {
             }
         });
     }
+
+    public void setFightBackground(Color newColor) {
+        card1.setBackground(newColor);
+    }
+
 
     public void nextPanel(CardLayout layout, Container panel) {
         layout.next(panel);

@@ -1,3 +1,5 @@
+//EVERY CLASS NEEDS A NAME DATE DESCRIPTION
+
 import javax.swing.*;
 
 abstract class Creature {
@@ -18,13 +20,13 @@ abstract class Creature {
         this.sprite = sprite;
     }
 
-    public void fight(Creature enemy, int userBoost, int enemyBoost, Application scene, boolean isPlayer) {
+    public void fight(Creature enemy, int userBoost, int enemyBoost, Application scene, boolean isPlayer, int[] battlefieldChanges) {
 
         if (this.getHealth() > 0) {
 
             //create temporary sets of stats for only this turn
-            int[] playerStats = cloneStats(this, userBoost);
-            int[] enemyStats = cloneStats(enemy, enemyBoost);
+            int[] playerStats = cloneStats(this, userBoost, battlefieldChanges);
+            int[] enemyStats = cloneStats(enemy, enemyBoost, battlefieldChanges);
             if (this.isStunned) {
                 playerStats[2] = -50;
                 this.stunned(false);
@@ -37,8 +39,11 @@ abstract class Creature {
         }
     }
 
-    private int[] cloneStats(Creature animal, int boost) {
+    private int[] cloneStats(Creature animal, int boost, int[] battlefieldChanges) {
         int[] newStats = animal.stats.clone();
+        for (int i = 0; i < 3; i++) {
+            newStats[i] += battlefieldChanges[i];
+        }
         newStats[boost] += animal.modifier;
         return newStats;
     }
@@ -64,6 +69,7 @@ abstract class Creature {
         if (toCompare[1][4] == -1) {
             attacker.setHealth(attacker.getHealth()+1);
         }
+        //THIS IS THORNS. DOESN'T WORK ANYMORE??
         if  (enemy.getHealth() > 0 && toCompare[0][4] == -1) {
             attacker.setHealth(attacker.getHealth()-1);
         }
