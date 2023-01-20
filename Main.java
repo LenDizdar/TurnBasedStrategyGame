@@ -7,7 +7,8 @@ public class Main {
     static Creature[] enemies = generateEnemies();
     static Creature opponent;
     static int nextEncounter = 0;
-    static ImageIcon[] icons;
+    static ImageIcon[] enemyIcons;
+    static ImageIcon[] environmentIcons;
     static Environment[] battlefields = generateEnvironments();
     static Environment battlefield = battlefields[0];
 
@@ -18,42 +19,65 @@ public class Main {
     private static Creature[] generateEnemies() {
         String[] names = {"Rylan", "Len", "Mrs. Uniat", "Tuong"};
         Creature[] toReturn = new Creature[4];
-        icons = new ImageIcon[4];
+        enemyIcons = new ImageIcon[4];
         for (int i = 0; i < 4; i++) {
             int randomNumber = (int) (Math.random()*4);
             switch (randomNumber) {
                 case 0 -> {
                     toReturn[i] = new Destruction(names[i], i * 2);
-                    icons[i] = new ImageIcon("Destruction.png");
+                    enemyIcons[i] = new ImageIcon("Destruction.png");
                 }
                 case 1 -> {
                     toReturn[i] = new Flurry(names[i], i * 2);
-                    icons[i] = new ImageIcon("Flurry.png");
+                    enemyIcons[i] = new ImageIcon("Flurry.png");
                 }
                 case 2 -> {
                     toReturn[i] = new Bewitched(names[i], i * 2);
-                    icons[i] = new ImageIcon("Bewitched.png");
+                    enemyIcons[i] = new ImageIcon("Bewitched.png");
                 }
                 case 3 -> {
                     toReturn[i] = new Resolve(names[i], i * 2);
-                    icons[i] = new ImageIcon("Resolve.png");
+                    enemyIcons[i] = new ImageIcon("Resolve.png");
                 }
             }
         }
         return toReturn;
     }
 
+    //I considered making using some generalization to put these generation methods together
+    //But that would be so much more inefficient - new class, new null methods in environment - than just repeating myself a little
     private static Environment[] generateEnvironments() {
         Environment[] toReturn = new Environment[4];
+        environmentIcons = new ImageIcon[4];
         for (int i = 0; i < 4; i++) {
             int randomNumber = (int) (Math.random()*3);
             switch (randomNumber) {
-                case 0 -> toReturn[i] = Environment.FOREST;
-                case 1 -> toReturn[i] = Environment.DESERT;
-                case 2 -> toReturn[i] = Environment.TUNDRA;
+                case 0 -> {
+                    toReturn[i] = environmentSetup(i, Environment.FOREST, "Forest.png");
+                }
+                case 1 -> {
+                    toReturn[i] = environmentSetup(i, Environment.DESERT, "Desert.png");
+                }
+                case 2 -> {
+                    toReturn[i] = environmentSetup(i, Environment.TUNDRA, "Tundra.png");
+                }
             }
         }
         return toReturn;
+    }
+
+    private static Environment environmentSetup(int i, Environment environment, String imageName) {
+        environmentIcons[i] = new ImageIcon(imageName);
+        int[] stats = environment.getStatChanges();
+        environmentIcons[i].setDescription("<html><strong>" + environment + "</strong><br>Damage:" + showSign(stats[0]) + "<br>Defense:" + showSign(stats[1]) + "<br>Attacks:" + showSign(stats[2]));
+        return environment;
+    }
+
+    private static String showSign(int n) {
+        if (n < 0){
+            return "" + n;
+        }
+        return "+" + n;
     }
 
     public static void main(String[] args) {
@@ -64,7 +88,9 @@ public class Main {
         }
         frame = new JFrame("Application");
         scene.initialize(frame, scene.card1);
-        scene.getStartMenu().fillEnemyList(icons);
+        scene.getStartMenu().initializePopups();
+        scene.getStartMenu().fillEnemyList(enemyIcons, true);
+        scene.getStartMenu().fillEnemyList(environmentIcons, false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
