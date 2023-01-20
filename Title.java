@@ -51,7 +51,7 @@ public class Title implements Screen {
         classInfo.add(new JLabel("Name your creature!"));
         classInfo.add(nameInput);
         classInfo.add(classInfoText);
-        classInfo.setPreferredSize(new Dimension(100,200));
+        classInfo.setPreferredSize(new Dimension(120,200));
     }
 
     public Title() {
