@@ -13,20 +13,20 @@ public class PostFight implements Screen {
     public PostFight() {
 
         damage1Button.addActionListener(e -> {
+            Main.getPlayerCreature().buff(0);
             goNext();
-            playerCreature.buff(0);
         });
         defense1Button.addActionListener(e -> {
+            Main.getPlayerCreature().buff(1);
             goNext();
-            playerCreature.buff(1);
         });
         attacksButton.addActionListener(e -> {
+            Main.getPlayerCreature().buff(2);
             goNext();
-            playerCreature.buff(2);
         });
         healButton.addActionListener(e -> {
+            Main.getPlayerCreature().fullHeal();
             goNext();
-            playerCreature.fullHeal();
         });
     }
 
@@ -35,7 +35,6 @@ public class PostFight implements Screen {
     }
 
     private void goNext() {
-        playerCreature = Main.getPlayerCreature();
         Main.nextEncounter();
         Application.goFightPanel();
     }

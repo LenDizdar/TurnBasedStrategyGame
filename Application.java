@@ -82,6 +82,7 @@ public class Application {
         layout.next(panel);
         nextSetVisible(false);
         combatLog.setText("<html>Combat Log: ");
+        shop.playerStatSet();
     }
     public static void goFightPanel() {
         cardsLayout.show(cards, "fight");
