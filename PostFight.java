@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class PostFight extends Screen {
+public class PostFight implements Screen {
     private JButton damage1Button;
     private JPanel panel;
     private JButton healButton;

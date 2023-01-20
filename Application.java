@@ -22,8 +22,10 @@ public class Application {
     private JScrollPane scrollBox;
     public JLabel PlayerPic;
     public JLabel OpponentPic;
+    private JButton toGloryButton;
     private Title startMenu;
     public PostFight shop = new PostFight();
+    private JPanel winScreen = new JPanel(new GridLayout(3,3));
 
     public void initialize(JFrame frame, JPanel fightPanel) {
         Container pane = frame.getContentPane();
@@ -33,8 +35,12 @@ public class Application {
         cards.add(startMenu.getPanel(), "startMenu");
         cards.add(fightPanel, "fight");
         cards.add(shop.getPanel(), "shop");
-        makeNextButton(startMenu.getNextButton(), cards);
-        makeNextButton(nextButton, cards);
+        cards.add(winScreen, "winScreen");
+        JLabel winText = new JLabel("You won!!", SwingConstants.CENTER);
+        winText.setFont(new Font("Serif", Font.PLAIN, 100));
+        winScreen.add(winText);
+        makeNextButton(startMenu.getNextButton());
+        makeNextButton(nextButton);
         pane.add(cards, BorderLayout.CENTER);
     }
     public Title getStartMenu() {
@@ -50,6 +56,7 @@ public class Application {
         attacks2Button.addActionListener(e -> battleButton(2));
 
         lossButton.addActionListener(e -> System.exit(1));
+        toGloryButton.addActionListener(e -> cardsLayout.last(cards));
     }
 
     public void setCreaturePictures(ImageIcon player, ImageIcon opponent) {
@@ -57,11 +64,11 @@ public class Application {
         OpponentPic.setIcon(opponent);
     }
 
-    private void makeNextButton(JButton button, Container panel) {
+    private void makeNextButton(JButton button) {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                nextPanel(Application.cardsLayout, panel);
+                nextPanel(Application.cardsLayout, cards);
             }
         });
     }
@@ -106,12 +113,16 @@ public class Application {
     private void nextSetVisible(boolean isVisible) {
         nextButton.setVisible(isVisible);
     }
+    private void toGlorySetVisible(boolean isVisible) {
+        toGloryButton.setVisible(isVisible);
+        nextButton.setVisible(!isVisible);
+    }
     public void updateCombatLog(String content) {
         combatLog.setText(combatLog.getText() + "<br>" + content);
         scrollBox.getVerticalScrollBar().setValue(scrollBox.getVerticalScrollBar().getMaximum());
     }
 
-    public void displayIntention(int intention, int health, String name) {
+    public void displayIntention(int intention, int health, String name, boolean isTuong) {
         var intentionString = switch (intention) {
             case 0 -> "damage per attack";
             case 1 -> "defense";
@@ -124,6 +135,9 @@ public class Application {
         } else {
             toDisplay = name + " has been beat!";
             nextButton.setVisible(true);
+            if (isTuong) {
+                toGlorySetVisible(true);
+            }
         }
         enemyIntentionText.setText(toDisplay);
     }

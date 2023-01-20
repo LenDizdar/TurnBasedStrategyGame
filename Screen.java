@@ -1,3 +1,6 @@
-public class Screen {
-    //I know this superclass should exist I just don't know how to mix the getPanel() method with the .form files.
+import javax.swing.*;
+
+public interface Screen {
+    JPanel getPanel();
+    //there certainly is a relation between the classes that implement this, just not as much as I thought.
 }

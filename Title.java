@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Title extends Screen {
+public class Title implements Screen {
     private JPanel panel;
     private JButton StartButton;
     private JButton button1;

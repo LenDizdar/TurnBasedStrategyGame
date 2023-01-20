@@ -87,7 +87,7 @@ public class Main {
         scene.updateHealth(true, true, player);
         scene.updateHealth(true, false, enemy);
         enemy.setRandomIntention();
-        scene.displayIntention(enemy.getIntention(), enemy.getHealth(), enemy.getName());
+        scene.displayIntention(enemy.getIntention(), enemy.getHealth(), enemy.getName(), false);
 
     }
 
@@ -107,7 +107,7 @@ public class Main {
         scene.updateHealth(false, true, a);
         scene.updateHealth(false, false, b);
         b.setRandomIntention();
-        scene.displayIntention(b.getIntention(), b.getHealth(), b.getName());
+        scene.displayIntention(b.getIntention(), b.getHealth(), b.getName(), (opponent.getName().equals("Tuong")));
     }
 
     public static void confirmInput(int userInput) {
