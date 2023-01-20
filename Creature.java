@@ -51,7 +51,6 @@ abstract class Creature {
     private int resolveFight(Creature creature, Creature enemyCreature, int[] player, int[] enemy, Application scene, boolean isPlayer) {
         int damageSum = 0;
         for (int i = 0; i < player[2]; i++) {
-            System.out.println(creature.getName() + "'s Attack: " + (i+1));
             damageSum += resolveAttack(creature.fightUnique(enemyCreature.defendUnique(player.clone(), enemy.clone(), scene),enemy.clone(), scene), creature, enemyCreature);
             if (enemy[1] > 0) {
                 enemy[1] -= 1;
@@ -69,11 +68,9 @@ abstract class Creature {
         if (toCompare[1][4] == -1) {
             attacker.setHealth(attacker.getHealth()+1);
         }
-        //THIS IS THORNS. DOESN'T WORK ANYMORE??
         if  (enemy.getHealth() > 0 && toCompare[0][4] == -1) {
             attacker.setHealth(attacker.getHealth()-1);
         }
-        System.out.println("Damage: " + damage);
         return Math.max(damage, 0);
     }
 

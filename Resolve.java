@@ -19,6 +19,7 @@ public class Resolve extends Creature {
     }
 
     protected int[] defendUnique(int[] player, int[] opponent, Application scene) {
+        player[4] = -1;
         return player;
     }
 

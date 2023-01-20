@@ -11,7 +11,6 @@ public class Destruction extends Creature {
         if (Math.random()*100 <= critChance) {
             player[0] *= 2;
             scene.updateCombatLog(this.getName() + " crit!");
-            System.out.println("crit!");
         }
         return (new int[][] {player, opponent});
     }

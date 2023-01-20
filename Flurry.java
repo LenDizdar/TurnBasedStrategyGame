@@ -17,7 +17,6 @@ public class Flurry extends Creature {
         if (Math.random()*100 <= dodgeChance) {
             player[2] --;
             scene.updateCombatLog(this.getName() + " dodged!");
-            System.out.println("dodged!!!!!!!!!!!!");
         }
         return player;
     }
