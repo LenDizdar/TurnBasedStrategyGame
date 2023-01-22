@@ -1,3 +1,10 @@
+/*
+Name: Len Dizdar
+Date: 1/22/2023
+Description: Environments are the place in which battles are held. They modify
+both creatures' stats by a certain, constant amount. They also change the colour
+of the fight screen!
+ */
 import java.awt.*;
 
 public enum Environment {
@@ -9,6 +16,13 @@ public enum Environment {
     Color color;
     String name;
     private int[] statChanges;
+
+    /**
+     * Creates an environment. These guys change stats and affect decision-making.
+     * @param statChanges The actual modifications made to creatures' stats.
+     * @param color The background colour.
+     * @param name The identifier string, used for the popup menus.
+     */
     Environment(int[] statChanges, Color color, String name)
 {       this.color = color;
         this.statChanges = statChanges;
