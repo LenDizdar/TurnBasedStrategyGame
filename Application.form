@@ -15,7 +15,7 @@
     <children>
       <component id="387cc" class="javax.swing.JButton" binding="damage2Button">
         <constraints>
-          <grid row="10" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Damage per attack +1"/>
@@ -23,7 +23,7 @@
       </component>
       <component id="e0fe8" class="javax.swing.JButton" binding="defense2Button" default-binding="true">
         <constraints>
-          <grid row="11" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="11" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Defense +1"/>
@@ -31,7 +31,7 @@
       </component>
       <component id="8c856" class="javax.swing.JButton" binding="attacks2Button" default-binding="true">
         <constraints>
-          <grid row="12" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="12" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Attacks per round +1"/>
@@ -49,7 +49,7 @@
       </vspacer>
       <component id="142cc" class="javax.swing.JLabel" binding="userHelpText">
         <constraints>
-          <grid row="9" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="9" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="What stat will you boost this round?                                               "/>
@@ -76,7 +76,7 @@
       </component>
       <component id="c6e63" class="javax.swing.JProgressBar" binding="enemyHealth">
         <constraints>
-          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-4408132"/>
@@ -102,7 +102,7 @@
       </component>
       <component id="85f6f" class="javax.swing.JLabel" binding="playerHealthText">
         <constraints>
-          <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Health:"/>
@@ -140,7 +140,7 @@
       </component>
       <scrollpane id="f0a77" binding="scrollBox">
         <constraints>
-          <grid row="4" column="3" row-span="5" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="4" column="3" row-span="5" col-span="1" vsize-policy="3" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="200" height="100"/>
           </grid>
         </constraints>
