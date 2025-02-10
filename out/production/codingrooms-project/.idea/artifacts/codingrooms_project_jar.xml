@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="codingrooms-project:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/codingrooms_project_jar</output-path>
+    <root id="archive" name="codingrooms-project.jar">
+      <element id="module-output" name="codingrooms-project" />
+    </root>
+  </artifact>
+</component>
